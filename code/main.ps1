@@ -1,4 +1,6 @@
 Clear-Host
+[Console]::ForegroundColor = 'Red'
+[Console]::BackgroundColor = 'Black'
 
 #region Foreground color functions
 
@@ -28,6 +30,7 @@ Clear-Host
 
     function mainMenu {
         Write-Output "미구현" | Cyan
+        Pause
     }
 
     function login {
@@ -74,4 +77,5 @@ Clear-Host
     greeting
 #endregion
 
+[Console]::ResetColor()
 Pause
