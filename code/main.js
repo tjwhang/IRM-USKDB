@@ -1,2 +1,13 @@
 console.clear()
-console.log("Node.js is working as intended.")
+
+title()
+
+function title() {
+  console.log("====================================")
+  console.log("        * USK 정보 데이터베이스       ")
+  console.log("====================================")
+}
+
+function greeting() {
+    
+}
