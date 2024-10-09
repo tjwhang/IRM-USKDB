@@ -3,7 +3,12 @@
 Write-Host "USK 총 데이터베이스에 오신 것을 환영합니다."
 Write-Host "스크립트 실행 과정에서 관리자 권한이 필요할 수 있습니다. 동의해 주십시오."
 
-start-process powershell –verb runAs
+# Check if the script is running with administrative privileges
+if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    # Re-run the script with elevated privileges
+    Start-Process PowerShell -ArgumentList "-File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
 
 # Write-Host "프로그램 구동을 위해 Node.JS가 필요합니다. Node.JS가 설치되어 있는지 확인합니다."
 
