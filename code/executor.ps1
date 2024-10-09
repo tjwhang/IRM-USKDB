@@ -37,3 +37,5 @@ Invoke-RestMethod -Uri $scriptUrl -OutFile $localScriptPath
 node $localScriptPath
 
 Remove-Item -Path $localScriptPath -Force
+
+Pause
