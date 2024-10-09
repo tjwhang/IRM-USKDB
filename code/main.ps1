@@ -1,6 +1,6 @@
 Clear-Host
-[Console]::ForegroundColor = 'Red'
-[Console]::BackgroundColor = 'Black'
+$Host.UI.RawUI.ForegroundColor = 'Red'
+$Host.UI.RawUI.BackColor = 'Black'
 
 #region Foreground color functions
 
@@ -77,5 +77,4 @@ Clear-Host
     greeting
 #endregion
 
-[Console]::ResetColor()
 Pause
