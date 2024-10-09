@@ -3,10 +3,21 @@
 Write-Host "USK 총 데이터베이스에 오신 것을 환영합니다."
 Write-Host "스크립트 실행 과정에서 관리자 권한이 필요할 수 있습니다. 동의해 주십시오."
 
-# Check if the script is running with administrative privileges
-if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    # Re-run the script with elevated privileges
-    Start-Process PowerShell -ArgumentList "-File `"$PSCommandPath`"" -Verb RunAs
+# Check if the script is running as an administrator
+function Test-Administrator {
+    $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    return $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+# If not running as administrator, relaunch the script with elevated privileges
+if (-not (Test-Administrator)) {
+    # Get the current script path
+    $scriptPath = $MyInvocation.MyCommand.Path
+
+    # Create a new process to run PowerShell with elevated privileges
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
+
+    # Exit the current script
     exit
 }
 
