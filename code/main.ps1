@@ -1,6 +1,7 @@
 Clear-Host
 $Host.UI.RawUI.ForegroundColor = 'Red'
 $Host.UI.RawUI.BackgroundColor = 'Black'
+Clear-Host
 
 #region Foreground color functions
 
