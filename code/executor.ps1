@@ -3,6 +3,14 @@
 Write-Host "USK 총 데이터베이스에 오신 것을 환영합니다."
 Write-Host "스크립트 실행 과정에서 관리자 권한이 필요할 수 있습니다. 동의해 주십시오."
 
+Write-Host "데이터베이스 스크립트를 env:TEMP($env:TEMP)에 다운로드합니다."
+
+# URL to the raw .cmd script on GitHub
+$scriptUrl = "https://raw.githubusercontent.com/tjwhang/IRM-USKDB/refs/heads/main/code/main.ps1"
+
+# Path to save the downloaded script locally
+$localScriptPath = "$env:TEMP\irmuskdb.ps1"
+
 # Check if the script is running as an administrator
 function Test-Administrator {
     $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
@@ -12,10 +20,9 @@ function Test-Administrator {
 # If not running as administrator, relaunch the script with elevated privileges
 if (-not (Test-Administrator)) {
     # Get the current script path
-    $scriptPath = $MyInvocation.MyCommand.Path
 
     # Create a new process to run PowerShell with elevated privileges
-    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$localScriptPath`"" -Verb RunAs
 
     # Exit the current script
     exit
@@ -43,13 +50,7 @@ if (-not (Test-Administrator)) {
 # node -v
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
-Write-Host "데이터베이스 스크립트를 env:TEMP($env:TEMP)에 다운로드합니다."
 
-# URL to the raw .cmd script on GitHub
-$scriptUrl = "https://raw.githubusercontent.com/tjwhang/IRM-USKDB/refs/heads/main/code/main.ps1"
-
-# Path to save the downloaded script locally
-$localScriptPath = "$env:TEMP\irmuskdb.ps1"
 
 # Download the script using Invoke-RestMethod
 Invoke-RestMethod -Uri $scriptUrl -OutFile $localScriptPath
