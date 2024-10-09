@@ -73,3 +73,5 @@ Clear-Host
     title
     greeting
 #endregion
+
+Pause
