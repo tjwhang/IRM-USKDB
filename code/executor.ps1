@@ -34,6 +34,8 @@ $localScriptPath = "$env:TEMP\irmuskdb.ps1"
 # Download the script using Invoke-RestMethod
 Invoke-RestMethod -Uri $scriptUrl -OutFile $localScriptPath
 
+Unblock-File -Path $localScriptPath
+
 # Execute the downloaded .cmd script
 #Start-Process -FilePath "cmd.exe" -ArgumentList "/c $localScriptPath" -Wait
 powershell "$localScriptPath"
