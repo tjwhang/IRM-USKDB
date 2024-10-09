@@ -16,6 +16,8 @@ try {
     Write-Host "Node.js가 설치되었습니다."
 }
 
+npm i chalk -y
+
 # Get the Node.js version
 Write-Host "Node.JS 버전: "
 
