@@ -22,6 +22,7 @@ Write-Host "USK 총 데이터베이스에 오신 것을 환영합니다."
 # Write-Host "Node.JS 버전: "
 
 # node -v
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 Write-Host "데이터베이스 스크립트를 env:TEMP($env:TEMP)에 다운로드합니다."
 
@@ -35,6 +36,7 @@ $localScriptPath = "$env:TEMP\irmuskdb.ps1"
 Invoke-RestMethod -Uri $scriptUrl -OutFile $localScriptPath
 
 Unblock-File -Path $localScriptPath
+Get-ExecutionPolicy
 
 # Execute the downloaded .cmd script
 #Start-Process -FilePath "cmd.exe" -ArgumentList "/c $localScriptPath" -Wait
